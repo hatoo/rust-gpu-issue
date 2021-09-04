@@ -5,9 +5,17 @@
     register_attr(spirv)
 )]
 
-use spirv_std::glam::Vec4;
 #[cfg(not(target_arch = "spirv"))]
 use spirv_std::macros::spirv;
 
-#[spirv(closest_hit)]
-pub fn test_closest_hit(#[spirv(object_to_world)] _object_to_world: [Vec4; 3]) {}
+use spirv_std as _;
+
+#[derive(PartialEq, Eq)]
+struct T(u32);
+
+#[spirv(fragment)]
+pub fn main(out: &mut f32) {
+    if T(0) == T(0) {
+        *out = 1.0;
+    }
+}

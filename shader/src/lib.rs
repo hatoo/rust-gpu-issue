@@ -5,9 +5,15 @@
     register_attr(spirv)
 )]
 
-use spirv_std::glam::Vec4;
 #[cfg(not(target_arch = "spirv"))]
 use spirv_std::macros::spirv;
 
-#[spirv(closest_hit)]
-pub fn test_closest_hit(#[spirv(object_to_world)] _object_to_world: [Vec4; 3]) {}
+use spirv_std as _;
+
+#[spirv(vertex)]
+pub fn test_vs() {
+    let mut x1 = 0.0f32;
+    let mut x2 = 1.0f32;
+
+    core::mem::swap(&mut x1, &mut x2);
+}
